@@ -1,0 +1,28 @@
+{
+  "name": "desktop-application",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "browserslist": [
+    "electron 11.2"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "@babel/register": "^7.12.13",
+    "electron": "^11.2.3",
+    "electron-reload": "^1.5.0",
+    "mysql": "^2.18.1",
+    "react-router-dom": "^5.2.0",
+    "react-simplified": "^2.0.2"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.144.0",
+    "prettier": "^2.2.1"
+  }
+}
