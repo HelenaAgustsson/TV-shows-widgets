@@ -31,6 +31,16 @@ class ShowService {
       }
     );
   }
+  saveNewShow(show, success) {
+    pool.query(
+      'INSERT INTO Shows (title, description) VALUES (?,?)',
+      [show.title, show.description],
+      (error, results) => {
+        if (error) return console.log(error);
+        success();
+      }
+    );
+  }
 }
 
 class StudentService {

@@ -122,28 +122,6 @@ class TVDetails extends Component {
   }
 }
 
-class TVNew extends Component {
-  render() {
-    return (
-      <div>
-        <Card title="New TV Show">
-          <Row>
-            <Column width={3}>Title:</Column>
-            <Column>
-              <input></input>
-            </Column>
-          </Row>
-          <Row>
-            <Column width={3}>Description:</Column>
-            <Column>{}</Column>
-          </Row>
-        </Card>
-      </div>
-    );
-  }
-  mounted() {}
-}
-
 class TVEdit extends Component {
   show = null;
   myRating = 0;
@@ -192,6 +170,50 @@ class TVEdit extends Component {
   rateShow() {
     console.log(this.myRating);
     showService.addRating(this.show.id, this.myRating, () => {
+      history.push('/shows');
+    });
+  }
+}
+
+class TVNew extends Component {
+  show = [];
+  render() {
+    return (
+      <div>
+        <Card title="New TV Show">
+          <Row>
+            <Column width={3}>
+              <Form.Label>Title:</Form.Label>
+            </Column>
+            <Column>
+              <Form.Input
+                type="text"
+                onChange={(event) => (this.show.title = event.currentTarget.value)}
+              />
+            </Column>
+          </Row>
+          <Row>
+            <Column width={3}>
+              <Form.Label>Description:</Form.Label>
+            </Column>
+            <Column>
+              <Form.Input
+                type="text"
+                onChange={(event) => (this.show.description = event.currentTarget.value)}
+              />
+            </Column>
+          </Row>
+        </Card>
+        <Row>
+          <Column>
+            <Button.Success onClick={this.save}>Save new show</Button.Success>
+          </Column>
+        </Row>
+      </div>
+    );
+  }
+  save() {
+    showService.saveNewShow(this.show, () => {
       history.push('/shows');
     });
   }
