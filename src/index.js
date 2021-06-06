@@ -36,10 +36,15 @@ class TVList extends Component {
               <Column>
                 <NavLink to={'/shows/' + show.id}>{show.title}</NavLink>
               </Column>
+              <Column>{show.description}</Column>
             </Row>
           ))}
         </Card>
-        <button onClick={this.add}>Add new show</button>
+        <Row>
+          <Column>
+            <Button.Success onClick={this.add}>Add new show</Button.Success>
+          </Column>
+        </Row>
       </div>
     );
   }
@@ -49,7 +54,7 @@ class TVList extends Component {
     });
   }
   add() {
-    history.push('shows/new');
+    history.push('/shows/new');
   }
 }
 
@@ -84,17 +89,21 @@ class TVDetails extends Component {
           <Row>
             <Column width={4}>Average Rating:</Column>
             <Column>
-              {Math.round(
-                this.showRatings.reduce(
+              {this.showRatings
+                .reduce(
                   (average, showRating, _index, showRatings) =>
                     average + showRating.rating / showRatings.length,
                   0
                 )
-              )}
+                .toFixed(1)}
             </Column>
           </Row>
         </Card>
-        <Button.Light onClick={this.edit}>Edit</Button.Light>
+        <Row>
+          <Column>
+            <Button.Success onClick={this.edit}>Rate this show</Button.Success>
+          </Column>
+        </Row>
       </div>
     );
   }
@@ -115,11 +124,20 @@ class TVDetails extends Component {
 
 class TVNew extends Component {
   render() {
-    if (!this.show) return null;
-
     return (
       <div>
-        <Card title="New TV Show"></Card>
+        <Card title="New TV Show">
+          <Row>
+            <Column width={3}>Title:</Column>
+            <Column>
+              <input></input>
+            </Column>
+          </Row>
+          <Row>
+            <Column width={3}>Description:</Column>
+            <Column>{}</Column>
+          </Row>
+        </Card>
       </div>
     );
   }
@@ -144,19 +162,25 @@ class TVEdit extends Component {
             <Column width={3}>Description:</Column>
             <Column>{this.show.description}</Column>
           </Row>
-          <Column width={5}>
-            <Form.Label>Your rating:</Form.Label>{' '}
-          </Column>
-          <Column>
-            <input
-              type="number"
-              min="0"
-              max="5"
-              onChange={(event) => (this.myRating = event.currentTarget.value)}
-            />
-          </Column>
+          <Row>
+            <Column width={3}>
+              <Form.Label>Your rating:</Form.Label>{' '}
+            </Column>
+            <Column>
+              <input
+                type="number"
+                min="0"
+                max="5"
+                onChange={(event) => (this.myRating = event.currentTarget.value)}
+              />
+            </Column>
+          </Row>
         </Card>
-        <button onClick={this.rateShow}>Add my rating</button>
+        <Row>
+          <Column>
+            <Button.Success onClick={this.rateShow}>Add my rating</Button.Success>
+          </Column>
+        </Row>
       </div>
     );
   }
@@ -235,7 +259,6 @@ ReactDOM.render(
         <Route exact path="/shows/:id" component={TVDetails} />
         <Route exact path="/shows/:id/edit" component={TVEdit} />
         <Route exact path="/shows/new" component={TVNew} />
-        <Route exact path="/students/:id/edit" component={StudentEdit} />
       </div>
     </HashRouter>
   </div>,
