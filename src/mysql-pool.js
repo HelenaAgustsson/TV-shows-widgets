@@ -6,6 +6,6 @@ export let pool = mysql.createPool({
   host: 'mysql-ait.stud.idi.ntnu.no',
   connectionLimit: 1, // Limit the number of simultaneous connections to avoid overloading the mysql server
   user: 'helenafa', // Replace "username" with your mysql-ait.stud.idi.ntnu.no username
-  password: 'oFewsxMo', // Replae "password" with your mysql-ait.stud.idi.ntnu.no password
+  password: 'password', // Replae "password" with your mysql-ait.stud.idi.ntnu.no password
   database: 'helenafa', // Replace "username" with your mysql-ait.stud.idi.ntnu.no username
 });
